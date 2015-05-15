@@ -1,5 +1,5 @@
 {
-    "name": "rusakov/yii2-activeresponse",
+    "name": "srusakov/yii2-activeresponse",
     "description": "Yii2 ajax module with active control from server side",
     "version": "0.0.1",
     "keywords": ["yii2", "ajax"],
