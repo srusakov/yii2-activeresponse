@@ -1,0 +1,22 @@
+{
+    "name": "rusakov/yii2-activeresponse",
+    "description": "Yii2 ajax module with active control from server side",
+    "version": "0.0.1",
+    "keywords": ["yii2", "ajax"],
+    "homepage": "http://github.com/srusakov/yii2-activeresponse",
+    "type": "yii2-extension",
+    "license": "BSD 3-Clause",
+    "authors": [
+        {
+            "name": "rusakov",
+            "email": "srusakov@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload" {
+        "psr-4": {
+            "srusakov\\activeresponse\\": ""
+        }
+    }
+}
