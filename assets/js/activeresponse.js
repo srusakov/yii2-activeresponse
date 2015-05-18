@@ -9,6 +9,13 @@
  * Built for Yii Framework 2.0
  */
 
+
+/**
+ * Call ActiveResponse PHP controller
+ * @param {string} controller/action to call
+ * @param {string|object} value $('#'+form_name).serialize() or serializeObject
+ * @param {function} callback
+ */
 function callAR(href, value, callback) {
 	// try to autodiscover current PHP file
 	if (href === null) {
@@ -16,11 +23,12 @@ function callAR(href, value, callback) {
 		if ((i = href.indexOf('?')) > 0 ) href = href.substring(0, i);
 		if ((i = href.indexOf('&')) > 0 ) href = href.substring(0, i);
 	}
-	if ( typeof(value) === "object") {
+    if (value === null || typeof(value) === 'undefined') {
+        value = 'callAR=1';
+    } else if ( typeof(value) === "object") {
         value.callAR = 1;
     } else {
-        if (typeof(value) === 'undefined') value = '';
-		value = 'callAR=1&' + value; /* $('#'+form_name).serialize() or serializeObject */
+		value = 'callAR=1&' + value;
 	}
     
 	// Do AJAX request

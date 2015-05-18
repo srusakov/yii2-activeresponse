@@ -101,7 +101,58 @@ class controllerController extends Controller {
 
             return $ar;
         }
+````
 
+#### Using ActiveResponse with DataGrid widget
+
+Example with Delete button inside DagaGrid's ActionColumn
+
+````
+    Pjax::begin(['options' => ['id' => 'pjax-container']]);
+    echo GridView::widget([
+        ...
+        'columns' => [
+            [
+                'class' => ActionColumn::className(),
+                'template' => '{delete}',
+                'deleteOptions' => ['data-pjax' => 0, 'class' => 'action-delete'],
+                'urlCreator' => function($action,$model,$key,$index) {
+                    return  ["/controller/{$action}", 'id'=>$model->id];
+                },
+            ],
+
+
+<script type="text/javascript">
+<?php ob_start() ?>
+$(document).ready(function() {
+    $('body').on('click', '.action-delete', function(e){
+        var href = $(this).attr('href');
+        var message = $(this).data('confirm');
+        if (typeof(message) !== 'undefined' && confirm(message)) {
+            callAR(href);
+        }
+        return false;
+    });
+});
+<?php $this->registerJs(ob_get_clean()) ?>
+</script>
+
+````
+
+And PHP Code inside Controller
+
+````
+public function actionDelete($id=null)
+{
+    $ar = new \srusakov\activeresponse\ActiveResponse();
+    $model = Model::findOne(['id' => $id]);
+    if ($model) {
+        $model->delete();
+    }
+    $ar->script("$.pjax.reload({container:'#pjax-container'});");
+    return $ar;
+}
+````
 
 ## License
 
